@@ -13,7 +13,51 @@
                 background-color: rgb(233,45,31);
                 color: rgb(255,255,255)
             }
-
+            #Close{
+             background-image: linear-gradient(to-right, rgb(102,51,153), rgb(136,83,189));
+             border-radius: 20px;
+             border: 0;
+             box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+             color: rgb(255,255,255);
+             cursor: pointer;
+             padding: 10px 25px;
+            }
+            #Close: active{
+             opacity: 0.8;
+            }
+            .modal{
+             background-color: rgba(0,0,0, 0.3);
+             opacity: 0;
+             position: fixed;
+             top: 0;
+             left:0;
+             bottom: 0;
+             right: 0;
+             transition: all 0.3s ease-in-out;
+             z-index: -1;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+            }
+            .modal.open{
+             opacity: 1;
+             z-index: 999;
+            }
+            .modal2{
+             background-color: rgb(255,255,255);
+             border-radius: 5px;
+             box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+             padding: 15px 25px;
+             text-align: center;
+             width: 380px;
+            }
+            .modal2 h2{
+            margin: 0;
+            }
+            .modal2 p{
+             line-height: 24px;
+             margin: 10px 0;
+            }
         </style>
         <script src="kbypass.js"></script>
 
@@ -31,8 +75,26 @@
             <input name="three" id="c" type="text">
             <br>
             <input name="four" id="d" type="text">
-            <input type="button" value="Submit" onclick="ohioFunction()">
+            <input id="Hellomate" type="button" value="Submit" onclick="ohioFunction()">
         </form>
+        <div class="modal" id="modals">
+         <div class="modal2" >
+         <h2>Recorded</h2>
+         <p>By the way typing your goals help but writing them down help even more! Try writing them down 3-4 times each.</p>
+         <button id="Close">Noted!</button>
+         </div>
+        </div>
+        <script>
+         const openBtn = document.getElementById("Hellomate");
+         const closeBtn= document.getElementById("Close");
+         const modal = document.getElementById("modal");
+         openBtn.addEventListener("click", ()=>{
+          modal.classlist.add("open")
+         });
+         closeBtn.addEventListener("click", ()=>{
+          modal.classlist.remove("open")
+         });
+        </script>
         <button id="kws" onclick="location.href='index.html'">Home</button>
 
     </body>
