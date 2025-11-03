@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+ <html>
+    <head>
+        <script src="cleveland.js"></script>
+        <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>
+        .pointer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 999;
+            width: 2rem;
+            aspect-ratio: 1;
+            background-color: rgba(255,255,255,0.35);
+            border: solid 2px transparent;
+            border-radius: 100%;
+            pointer-events: none;
+            transform: translate3d(var(--mouseX, 0), var(--mouseY, 0), 0) translate(-50% ,-50% );
+            transition: 0.3s ease-out;
+            transition-property: transform, width, border, background-color;
+
+        }
+        body:has(.btn:hover) .pointer{
+            width: 5rem;
+            background-color: transparent;
+            border-color: rgba(255,255,255,0.5);
+        }
+        body:has(.cube :hover) .pointer{
+            width: 3rem;
+            background-color: transparent;
+            border-color: rgba(255,255,255,0.5);
+        }
+        @media(prefers-reduced-motion: reduce) {
+            .pointer,
+            #coordinates {
+                display: none;
+            }
+        }
+        @media(pointer: coarse) {
+            .pointer,
+            #coordinates{
+                display: none;
+            }
+        }
+        #fanum{
+            color: rgb(255,255,255);
+            text-align: center;
+
+        }
+        body{
+            background-color: rgb(0,0,0);
+            margin: 0;
+            height: 100vh;
+            background: #111;
+            overflow: hidden;
+            position: relative;
+            perspective: 800px;
+        }
+        button{
+            width: 270px;
+            height: 40px;
+            background-color: rgb(233,45,31);
+            margin: 5px 0 5px 0;
+            border: solid .5px rgba(233,45,31,0.8);
+            border-radius: 2px;
+            color: rgb(255,255,255);
+        }
+        .ohio{
+            margin: 2px 0 1px 0;
+            border: solid 1px rgb(233,45,31);
+            height: 25px;
+            width: 280px;
+            border-radius: 2px;
+        }
+        #k{
+            background-color: rgb(233,45,31);
+            border: solid 1px rgb(233,45,31);
+            border-radius: 2.5px;
+            color: rgb(255,255,255);
+            height: 25;
+            width: 35;
+        }
+        #coordinates{
+            display: none;
+        }
+    /* Background dots container */
+    .dots {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    /* Each dot style */
+    .dot {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 50%;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+    }
+
+    /* cube container on right half */
+    .right-half {
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 50vw;  /* start halfway sideways */
+      width: 50vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .cube {
+      width: 205px;
+      height: 205px;
+      position: absolute;
+      transform-style: preserve-3d;
+      animation: spin 10s linear infinite;
+      pointer-events: auto;
+      cursor: pointer;
+      border-radius: 4px;
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+    }
+
+    .face {
+      position: absolute;
+      width: 205px;
+      height: 205px;
+      background: red;
+      border: 2px solid #800000;
+      opacity: 0.9;
+      border-radius: 4px;
+    }
+
+    .front  { transform: translateZ(110px); }
+    .back   { transform: rotateY(180deg) translateZ(110px); }
+    .right  { transform: rotateY(90deg) translateZ(110px); }
+    .left   { transform: rotateY(-90deg) translateZ(110px); }
+    .top    { transform: rotateX(90deg) translateZ(110px); }
+    .bottom { transform: rotateX(-90deg) translateZ(110px); }
+
+    @keyframes spin {
+      from { transform: rotateX(0deg) rotateY(0deg);}
+      to   { transform: rotateX(360deg) rotateY(360deg);}
+    }
+    .btn{
+      cursor: pointer;
+    }
+        </style>
+</head>
+    <body>
+        <title>School Tutor</title>
+        <h1 id="fanum"> Options:</h1>
+        <button class="btn" onclick="location.href='index.html'">Home</button>
+        <br>
+        <button class="btn" onclick="location.href='next.html'">Resources</button>
+        <br>
+        <button class="btn" onclick="location.href='after.html'">More</button>
+        <br>
+        <button class="btn" onclick="location.href='exercises.html'">Exercises</button>
+        <br>
+        <button class="btn" onclick="location.href='questions.html'">Information</button>
+        <!-- Search Function -->
+<form>
+    <input class="ohio" name="username1"  id="username6" type="text">
+    <br>
+    <input class="ohio" name="password2" id="password13" type="password" >
+    <input type="button" value="Search" onclick="maineFunction()" class="btn" id="k" >
+</form>
+<p id="coordinates">
+        Coordinates<br>
+        <strong></strong> 
+    </p> 
+<div class="pointer" aria-hidden='true'></div>
+<script> 
+const isReducedMotion = window.matchMedia('(prefers-reduced-motion reduce)').matches;
+const isTouch = window.matchMedia('(pointer: coarse)').matches;
+const shouldRun = !isReducedMotion && !isTouch;
+if(shouldRun){
+let mouseX = 0;
+let mouseY = 0;
+const pointer = document.querySelector('.pointer');
+//const coordinates = document.querySelector('#coordinates strong');
+window.addEventListener('mousemove', (e) => { 
+    mouseX = e.clientX; 
+    mouseY = e.clientY;
+     if (coordinates) { 
+        coordinates.innerText = `x: ${mouseX} y: ${mouseY}`;
+      } 
+    
+        });
+    function animate(){
+        pointer.style.setProperty('--mouseX' , `${mouseX}px`);
+    pointer.style.setProperty('--mouseY' , `${mouseY}px`);
+    requestAnimationFrame(animate);
+ }
+    animate();
+}
+</script> 
+
+<div class="dots" aria-hidden="true">
+</div>
+<div class="right-half">
+  <div class="cube" style="top: 65vh; left: -20vw;">
+    <div class="face front"></div>
+    <div class="face back"></div>
+    <div class="face right"></div>
+    <div class="face left"></div>
+    <div class="face top"></div>
+    <div class="face bottom"></div>
+  </div>
+
+  <div class="cube" style="top: 10vh; left: 25vw;">
+    <div class="face front"></div>
+    <div class="face back"></div>
+    <div class="face right"></div>
+    <div class="face left"></div>
+    <div class="face top"></div>
+    <div class="face bottom"></div>
+  </div>
+  <div class="cube" style="top: 55vh; left: 15vw;">
+    <div class="face front"></div>
+    <div class="face back"></div>
+    <div class="face right"></div>
+    <div class="face left"></div>
+    <div class="face top"></div>
+    <div class="face bottom"></div>
+  </div>
+  <div class="cube" style="top: 20vh; left: -10vw;">
+    <div class="face front"></div>
+    <div class="face back"></div>
+    <div class="face right"></div>
+    <div class="face left"></div>
+    <div class="face top"></div>
+    <div class="face bottom"></div>
+  </div>
+</div>
+<script>
+  //
+  const dotsContainer = document.querySelector('.dots');
+  const numDots = 48;
+  //
+  for(let i = 0; i < numDots; i++) {
+    const dot = document.createElement('div');
+    dot.classList.add('dot');
+    //
+    const size = Math.random() * 5 + 3;
+    dot.style.width = size + 'px';
+    dot.style.height = size + 'px';
+    //
+    dot.style.top = (Math.random() * 100) + 'vh';
+    dot.style.left = (Math.random() * 100) + 'vw';
+    //
+    const moveX = (Math.random() * 10 + 5) * (Math.random() > 0.5 ? 1 : -1);
+    const moveY = (Math.random() * 10 + 5) * (Math.random() > 0.5 ? 1 : -1);
+    //
+    const animName = 'move' + i;
+    const keyframes = `
+      @keyframes ${animName} {
+        0% { transform: translate(0, 0); }
+        100% { transform: translate(${moveX}px, ${moveY}px); }
+      }
+    `;
+
+    // Append style for animation to the document head
+    const styleSheet = document.createElement("style");
+    styleSheet.innerText = keyframes;
+    document.head.appendChild(styleSheet);
+
+    dot.style.animation = `${animName} ${3 + Math.random() * 5}s ease-in-out infinite alternate`;
+
+    dotsContainer.appendChild(dot);
+  }
+</script>
+</body>
+</html>
