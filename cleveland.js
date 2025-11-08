@@ -6,12 +6,12 @@
             alert("Huh 2");
             window.location.href = "Retro.html";
             
-        } else if(username === "TinyFishing" && pass === "Html-is-cool" ) {
+        } else if(username === "TinyFishing" && pass === "html-is-cool" ) {
             alert("Huh huh huh 3");
             window.location.href="Fishing.html";
             
         }
-        else if(username === "MonkeyMan" && pass === "Full-Stack-better" ) {
+        else if(username === "MonkeyMan" && pass === "full-stack-better" ) {
             alert("Monki");
             window.location.href="Monkey.html";
             
@@ -21,9 +21,13 @@
             window.location.href="Waitwhat.html"
         }
         else if(username === "Man-what" && pass === "Python-more-popular") {
-            alert("Really man?")
-            window.location.href="Man-what.html"
+            alert("Really man?");
+            window.location.href="Man-what.html";
         }
+         else if(username === "GitHack" && pass === "Githack-is-cool") {
+          alert("HOW?");
+          window.location.href="hello.html";
+         }
          else {
             alert("Nice Try");
         }
