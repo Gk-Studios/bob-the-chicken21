@@ -84,7 +84,7 @@
         #coordinates{
             display: none;
         }
-    /* Background dots container */
+    /* Background */
     .dots {
       position: fixed;
       top: 0; left: 0;
@@ -95,7 +95,7 @@
       z-index: 0;
     }
 
-    /* Each dot style */
+    /* dot style */
     .dot {
       position: absolute;
       background: rgba(255, 255, 255, 0.15);
@@ -152,10 +152,18 @@
     .btn{
       cursor: pointer;
     }
+         /* Word Art*/
+         #wordart{
+          position: fixed;
+          font-family: "Verdana", sans-serif;
+          box-shadow: 0 5px 2.5px 1px rgba(2,48,32,0.85);
+          transform: translate;
+         }
         </style>
 </head>
     <body>
         <title>School Tutor</title>
+        <div id="wordart">Version 2.0!</div>
         <h1 id="fanum"> Options:</h1>
         <button class="btn" onclick="location.href='index.html'">Home</button>
         <br>
