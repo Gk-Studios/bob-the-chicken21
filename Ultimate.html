@@ -154,11 +154,26 @@
     }
          /* Word Art*/
          #wordart{
-          position: fixed;
-          font-family: "Verdana", sans-serif;
-          box-shadow: 0 5px 2.5px 1px rgba(2,48,32,0.85);
-          transform: translate;
-         }
+      position: fixed;
+      color: white;
+      font-family: "Verdana", sans-serif;
+      animation-name: word;
+      animation-duration: 1s;
+      animation-direction: alternate;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+    }
+    @keyframes word{
+      0%{
+        transform: translate(175vh, 5vh) rotate(15deg) scale(1);
+      }
+      50%{
+        transform: translate(175vh, 5vh) rotate(15deg) scale(1.5);
+      }
+      100%{
+        transform: translate(175vh, 5vh) rotate(15deg) scale(1);
+      }
+    }
         </style>
 </head>
     <body>
