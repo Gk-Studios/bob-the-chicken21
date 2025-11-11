@@ -1,6 +1,4 @@
-setInterval(() => {
-        console.clear();
-    }, 1000);
+
     function ohioFunction() {
                 var user = document.getElementById("a").value;
                 var pass= document.getElementById("c").value;
