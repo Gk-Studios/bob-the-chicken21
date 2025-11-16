@@ -28,6 +28,10 @@
           alert("HOW?");
           window.location.href="hello.html";
          }
+          else if( username === "Chicken-Stars" && pass === "Dippin-Dots"){
+           alert("what?");
+           window.location.href="hello2.html";
+          }
          else {
             alert("Nice Try");
         }
