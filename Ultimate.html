@@ -4,6 +4,7 @@
     <head>
         <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+     <title>School Tutor</title>
         <style>
         .pointer {
             position: fixed;
@@ -78,8 +79,8 @@
             border: solid 1px rgb(233,45,31);
             border-radius: 2.5px;
             color: rgb(255,255,255);
-            height: 25;
-            width: 35;
+            height: 25px;
+            width: 35px;
         }
         #coordinates{
             display: none;
@@ -112,7 +113,7 @@
       left: 50vw;  /* start halfway sideways */
       width: 50vw;
       height: 100vh;
-      pointer-events: none;
+      pointer-events: auto;
       z-index: 10;
     }
 
@@ -122,8 +123,6 @@
       position: absolute;
       transform-style: preserve-3d;
       animation: spin 10s linear infinite;
-      pointer-events: auto;
-      cursor: pointer;
       border-radius: 4px;
       box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
     }
@@ -183,7 +182,6 @@
         </style>
 </head>
     <body>
-        <title>School Tutor</title>
         <div id="wordart">Version 2.0!</div>
         <h1 id="fanum"> Options:</h1>
         <button class="btn" onclick="location.href='index.html'">Home</button>
@@ -220,9 +218,6 @@ const pointer = document.querySelector('.pointer');
 window.addEventListener('mousemove', (e) => { 
     mouseX = e.clientX; 
     mouseY = e.clientY;
-     if (coordinates) { 
-        coordinates.innerText = `x: ${mouseX} y: ${mouseY}`;
-      } 
     
         });
     function animate(){
