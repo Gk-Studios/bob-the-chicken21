@@ -3,7 +3,7 @@
                 var user = document.getElementById("a").value;
                 var pass= document.getElementById("c").value;
 
-                if(user === "Propane-Onions-are-gasoline" && pass === "Carrots-gasoline-fire") {
+                if(user === "Krishang-isn't-cool" && pass === "Carrots-gasoline-fire") {
                     alert("correct")
                    window.location.href="Ultimate.html";
                 }
